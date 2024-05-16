@@ -14,6 +14,9 @@ _$WeatherInfoImpl _$$WeatherInfoImplFromJson(Map<String, dynamic> json) =>
       main: Main.fromJson(json['main'] as Map<String, dynamic>),
       sys: Sys.fromJson(json['sys'] as Map<String, dynamic>),
       name: json['name'] as String,
+      wind: json['wind'] == null
+          ? null
+          : Wind.fromJson(json['wind'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$WeatherInfoImplToJson(_$WeatherInfoImpl instance) =>
@@ -22,6 +25,7 @@ Map<String, dynamic> _$$WeatherInfoImplToJson(_$WeatherInfoImpl instance) =>
       'main': instance.main,
       'sys': instance.sys,
       'name': instance.name,
+      'wind': instance.wind,
     };
 
 _$MainImpl _$$MainImplFromJson(Map<String, dynamic> json) => _$MainImpl(
@@ -29,6 +33,7 @@ _$MainImpl _$$MainImplFromJson(Map<String, dynamic> json) => _$MainImpl(
       feelsLike: (json['feels_like'] as num).toDouble(),
       tempMin: (json['temp_min'] as num).toDouble(),
       tempMax: (json['temp_max'] as num).toDouble(),
+      humidity: json['humidity'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$$MainImplToJson(_$MainImpl instance) =>
@@ -37,6 +42,7 @@ Map<String, dynamic> _$$MainImplToJson(_$MainImpl instance) =>
       'feels_like': instance.feelsLike,
       'temp_min': instance.tempMin,
       'temp_max': instance.tempMax,
+      'humidity': instance.humidity,
     };
 
 _$SysImpl _$$SysImplFromJson(Map<String, dynamic> json) => _$SysImpl(
@@ -56,6 +62,7 @@ _$WeatherImpl _$$WeatherImplFromJson(Map<String, dynamic> json) =>
       id: json['id'] as int,
       main: json['main'] as String,
       description: json['description'] as String,
+      icon: json['icon'] as String,
     );
 
 Map<String, dynamic> _$$WeatherImplToJson(_$WeatherImpl instance) =>
@@ -63,4 +70,16 @@ Map<String, dynamic> _$$WeatherImplToJson(_$WeatherImpl instance) =>
       'id': instance.id,
       'main': instance.main,
       'description': instance.description,
+      'icon': instance.icon,
+    };
+
+_$WindImpl _$$WindImplFromJson(Map<String, dynamic> json) => _$WindImpl(
+      speed: (json['speed'] as num?)?.toDouble(),
+      deg: json['deg'] as int?,
+    );
+
+Map<String, dynamic> _$$WindImplToJson(_$WindImpl instance) =>
+    <String, dynamic>{
+      'speed': instance.speed,
+      'deg': instance.deg,
     };

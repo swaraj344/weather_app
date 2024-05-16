@@ -19,8 +19,10 @@ class WeatherInfoView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (weatherInfo.weather.isNotEmpty)
-              WeatherIcon(
-                weatherDescription: weatherInfo.weather[0].description,
+              Image.network(
+                "https://openweathermap.org/img/w/${weatherInfo.weather[0].icon}.png",
+                width: 80,
+                fit: BoxFit.cover,
               ),
             const SizedBox(
               height: 14,
@@ -63,6 +65,20 @@ class WeatherInfoView extends StatelessWidget {
                   "Feels like ${weatherInfo.main.feelsLike}°C",
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
+              ],
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "Humidity: ${weatherInfo.main.humidity}% ",
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                if (weatherInfo.wind != null)
+                  Text(
+                    "Wind Speed: ${weatherInfo.wind!.speed} km/h",
+                    style: Theme.of(context).textTheme.titleMedium,
+                  )
               ],
             )
           ],

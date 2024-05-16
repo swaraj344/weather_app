@@ -14,6 +14,7 @@ class WeatherInfo with _$WeatherInfo {
     required Main main,
     required Sys sys,
     required String name,
+    Wind? wind,
   }) = _WeatherInfo;
 
   factory WeatherInfo.fromJson(Map<String, dynamic> json) =>
@@ -30,6 +31,7 @@ class Main with _$Main {
     required double feelsLike,
     required double tempMin,
     required double tempMax,
+    @Default(0) int humidity,
   }) = _Main;
 
   factory Main.fromJson(Map<String, dynamic> json) => _$MainFromJson(json);
@@ -52,8 +54,19 @@ class Weather with _$Weather {
     required int id,
     required String main,
     required String description,
+    required String icon,
   }) = _Weather;
 
   factory Weather.fromJson(Map<String, dynamic> json) =>
       _$WeatherFromJson(json);
+}
+
+@freezed
+class Wind with _$Wind {
+  const factory Wind({
+    double? speed,
+    int? deg,
+  }) = _Wind;
+
+  factory Wind.fromJson(Map<String, dynamic> json) => _$WindFromJson(json);
 }

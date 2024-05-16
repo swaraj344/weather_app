@@ -24,6 +24,7 @@ mixin _$WeatherInfo {
   Main get main => throw _privateConstructorUsedError;
   Sys get sys => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  Wind? get wind => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,10 +38,12 @@ abstract class $WeatherInfoCopyWith<$Res> {
           WeatherInfo value, $Res Function(WeatherInfo) then) =
       _$WeatherInfoCopyWithImpl<$Res, WeatherInfo>;
   @useResult
-  $Res call({List<Weather> weather, Main main, Sys sys, String name});
+  $Res call(
+      {List<Weather> weather, Main main, Sys sys, String name, Wind? wind});
 
   $MainCopyWith<$Res> get main;
   $SysCopyWith<$Res> get sys;
+  $WindCopyWith<$Res>? get wind;
 }
 
 /// @nodoc
@@ -60,6 +63,7 @@ class _$WeatherInfoCopyWithImpl<$Res, $Val extends WeatherInfo>
     Object? main = null,
     Object? sys = null,
     Object? name = null,
+    Object? wind = freezed,
   }) {
     return _then(_value.copyWith(
       weather: null == weather
@@ -78,6 +82,10 @@ class _$WeatherInfoCopyWithImpl<$Res, $Val extends WeatherInfo>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      wind: freezed == wind
+          ? _value.wind
+          : wind // ignore: cast_nullable_to_non_nullable
+              as Wind?,
     ) as $Val);
   }
 
@@ -96,6 +104,18 @@ class _$WeatherInfoCopyWithImpl<$Res, $Val extends WeatherInfo>
       return _then(_value.copyWith(sys: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $WindCopyWith<$Res>? get wind {
+    if (_value.wind == null) {
+      return null;
+    }
+
+    return $WindCopyWith<$Res>(_value.wind!, (value) {
+      return _then(_value.copyWith(wind: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -106,12 +126,15 @@ abstract class _$$WeatherInfoImplCopyWith<$Res>
       __$$WeatherInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Weather> weather, Main main, Sys sys, String name});
+  $Res call(
+      {List<Weather> weather, Main main, Sys sys, String name, Wind? wind});
 
   @override
   $MainCopyWith<$Res> get main;
   @override
   $SysCopyWith<$Res> get sys;
+  @override
+  $WindCopyWith<$Res>? get wind;
 }
 
 /// @nodoc
@@ -129,6 +152,7 @@ class __$$WeatherInfoImplCopyWithImpl<$Res>
     Object? main = null,
     Object? sys = null,
     Object? name = null,
+    Object? wind = freezed,
   }) {
     return _then(_$WeatherInfoImpl(
       weather: null == weather
@@ -147,6 +171,10 @@ class __$$WeatherInfoImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      wind: freezed == wind
+          ? _value.wind
+          : wind // ignore: cast_nullable_to_non_nullable
+              as Wind?,
     ));
   }
 }
@@ -159,7 +187,8 @@ class _$WeatherInfoImpl implements _WeatherInfo {
       {required final List<Weather> weather,
       required this.main,
       required this.sys,
-      required this.name})
+      required this.name,
+      this.wind})
       : _weather = weather;
 
   factory _$WeatherInfoImpl.fromJson(Map<String, dynamic> json) =>
@@ -179,10 +208,12 @@ class _$WeatherInfoImpl implements _WeatherInfo {
   final Sys sys;
   @override
   final String name;
+  @override
+  final Wind? wind;
 
   @override
   String toString() {
-    return 'WeatherInfo(weather: $weather, main: $main, sys: $sys, name: $name)';
+    return 'WeatherInfo(weather: $weather, main: $main, sys: $sys, name: $name, wind: $wind)';
   }
 
   @override
@@ -193,13 +224,14 @@ class _$WeatherInfoImpl implements _WeatherInfo {
             const DeepCollectionEquality().equals(other._weather, _weather) &&
             (identical(other.main, main) || other.main == main) &&
             (identical(other.sys, sys) || other.sys == sys) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.wind, wind) || other.wind == wind));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_weather), main, sys, name);
+      const DeepCollectionEquality().hash(_weather), main, sys, name, wind);
 
   @JsonKey(ignore: true)
   @override
@@ -220,7 +252,8 @@ abstract class _WeatherInfo implements WeatherInfo {
       {required final List<Weather> weather,
       required final Main main,
       required final Sys sys,
-      required final String name}) = _$WeatherInfoImpl;
+      required final String name,
+      final Wind? wind}) = _$WeatherInfoImpl;
 
   factory _WeatherInfo.fromJson(Map<String, dynamic> json) =
       _$WeatherInfoImpl.fromJson;
@@ -233,6 +266,8 @@ abstract class _WeatherInfo implements WeatherInfo {
   Sys get sys;
   @override
   String get name;
+  @override
+  Wind? get wind;
   @override
   @JsonKey(ignore: true)
   _$$WeatherInfoImplCopyWith<_$WeatherInfoImpl> get copyWith =>
@@ -249,6 +284,7 @@ mixin _$Main {
   double get feelsLike => throw _privateConstructorUsedError;
   double get tempMin => throw _privateConstructorUsedError;
   double get tempMax => throw _privateConstructorUsedError;
+  int get humidity => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -260,7 +296,12 @@ abstract class $MainCopyWith<$Res> {
   factory $MainCopyWith(Main value, $Res Function(Main) then) =
       _$MainCopyWithImpl<$Res, Main>;
   @useResult
-  $Res call({double temp, double feelsLike, double tempMin, double tempMax});
+  $Res call(
+      {double temp,
+      double feelsLike,
+      double tempMin,
+      double tempMax,
+      int humidity});
 }
 
 /// @nodoc
@@ -280,6 +321,7 @@ class _$MainCopyWithImpl<$Res, $Val extends Main>
     Object? feelsLike = null,
     Object? tempMin = null,
     Object? tempMax = null,
+    Object? humidity = null,
   }) {
     return _then(_value.copyWith(
       temp: null == temp
@@ -298,6 +340,10 @@ class _$MainCopyWithImpl<$Res, $Val extends Main>
           ? _value.tempMax
           : tempMax // ignore: cast_nullable_to_non_nullable
               as double,
+      humidity: null == humidity
+          ? _value.humidity
+          : humidity // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -309,7 +355,12 @@ abstract class _$$MainImplCopyWith<$Res> implements $MainCopyWith<$Res> {
       __$$MainImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({double temp, double feelsLike, double tempMin, double tempMax});
+  $Res call(
+      {double temp,
+      double feelsLike,
+      double tempMin,
+      double tempMax,
+      int humidity});
 }
 
 /// @nodoc
@@ -326,6 +377,7 @@ class __$$MainImplCopyWithImpl<$Res>
     Object? feelsLike = null,
     Object? tempMin = null,
     Object? tempMax = null,
+    Object? humidity = null,
   }) {
     return _then(_$MainImpl(
       temp: null == temp
@@ -344,6 +396,10 @@ class __$$MainImplCopyWithImpl<$Res>
           ? _value.tempMax
           : tempMax // ignore: cast_nullable_to_non_nullable
               as double,
+      humidity: null == humidity
+          ? _value.humidity
+          : humidity // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -356,7 +412,8 @@ class _$MainImpl implements _Main {
       {required this.temp,
       required this.feelsLike,
       required this.tempMin,
-      required this.tempMax});
+      required this.tempMax,
+      this.humidity = 0});
 
   factory _$MainImpl.fromJson(Map<String, dynamic> json) =>
       _$$MainImplFromJson(json);
@@ -369,10 +426,13 @@ class _$MainImpl implements _Main {
   final double tempMin;
   @override
   final double tempMax;
+  @override
+  @JsonKey()
+  final int humidity;
 
   @override
   String toString() {
-    return 'Main(temp: $temp, feelsLike: $feelsLike, tempMin: $tempMin, tempMax: $tempMax)';
+    return 'Main(temp: $temp, feelsLike: $feelsLike, tempMin: $tempMin, tempMax: $tempMax, humidity: $humidity)';
   }
 
   @override
@@ -384,13 +444,15 @@ class _$MainImpl implements _Main {
             (identical(other.feelsLike, feelsLike) ||
                 other.feelsLike == feelsLike) &&
             (identical(other.tempMin, tempMin) || other.tempMin == tempMin) &&
-            (identical(other.tempMax, tempMax) || other.tempMax == tempMax));
+            (identical(other.tempMax, tempMax) || other.tempMax == tempMax) &&
+            (identical(other.humidity, humidity) ||
+                other.humidity == humidity));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, temp, feelsLike, tempMin, tempMax);
+      Object.hash(runtimeType, temp, feelsLike, tempMin, tempMax, humidity);
 
   @JsonKey(ignore: true)
   @override
@@ -411,7 +473,8 @@ abstract class _Main implements Main {
       {required final double temp,
       required final double feelsLike,
       required final double tempMin,
-      required final double tempMax}) = _$MainImpl;
+      required final double tempMax,
+      final int humidity}) = _$MainImpl;
 
   factory _Main.fromJson(Map<String, dynamic> json) = _$MainImpl.fromJson;
 
@@ -423,6 +486,8 @@ abstract class _Main implements Main {
   double get tempMin;
   @override
   double get tempMax;
+  @override
+  int get humidity;
   @override
   @JsonKey(ignore: true)
   _$$MainImplCopyWith<_$MainImpl> get copyWith =>
@@ -602,6 +667,7 @@ mixin _$Weather {
   int get id => throw _privateConstructorUsedError;
   String get main => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
+  String get icon => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -613,7 +679,7 @@ abstract class $WeatherCopyWith<$Res> {
   factory $WeatherCopyWith(Weather value, $Res Function(Weather) then) =
       _$WeatherCopyWithImpl<$Res, Weather>;
   @useResult
-  $Res call({int id, String main, String description});
+  $Res call({int id, String main, String description, String icon});
 }
 
 /// @nodoc
@@ -632,6 +698,7 @@ class _$WeatherCopyWithImpl<$Res, $Val extends Weather>
     Object? id = null,
     Object? main = null,
     Object? description = null,
+    Object? icon = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -646,6 +713,10 @@ class _$WeatherCopyWithImpl<$Res, $Val extends Weather>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      icon: null == icon
+          ? _value.icon
+          : icon // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -657,7 +728,7 @@ abstract class _$$WeatherImplCopyWith<$Res> implements $WeatherCopyWith<$Res> {
       __$$WeatherImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String main, String description});
+  $Res call({int id, String main, String description, String icon});
 }
 
 /// @nodoc
@@ -674,6 +745,7 @@ class __$$WeatherImplCopyWithImpl<$Res>
     Object? id = null,
     Object? main = null,
     Object? description = null,
+    Object? icon = null,
   }) {
     return _then(_$WeatherImpl(
       id: null == id
@@ -688,6 +760,10 @@ class __$$WeatherImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      icon: null == icon
+          ? _value.icon
+          : icon // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -696,7 +772,10 @@ class __$$WeatherImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$WeatherImpl implements _Weather {
   const _$WeatherImpl(
-      {required this.id, required this.main, required this.description});
+      {required this.id,
+      required this.main,
+      required this.description,
+      required this.icon});
 
   factory _$WeatherImpl.fromJson(Map<String, dynamic> json) =>
       _$$WeatherImplFromJson(json);
@@ -707,10 +786,12 @@ class _$WeatherImpl implements _Weather {
   final String main;
   @override
   final String description;
+  @override
+  final String icon;
 
   @override
   String toString() {
-    return 'Weather(id: $id, main: $main, description: $description)';
+    return 'Weather(id: $id, main: $main, description: $description, icon: $icon)';
   }
 
   @override
@@ -721,12 +802,13 @@ class _$WeatherImpl implements _Weather {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.main, main) || other.main == main) &&
             (identical(other.description, description) ||
-                other.description == description));
+                other.description == description) &&
+            (identical(other.icon, icon) || other.icon == icon));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, main, description);
+  int get hashCode => Object.hash(runtimeType, id, main, description, icon);
 
   @JsonKey(ignore: true)
   @override
@@ -746,7 +828,8 @@ abstract class _Weather implements Weather {
   const factory _Weather(
       {required final int id,
       required final String main,
-      required final String description}) = _$WeatherImpl;
+      required final String description,
+      required final String icon}) = _$WeatherImpl;
 
   factory _Weather.fromJson(Map<String, dynamic> json) = _$WeatherImpl.fromJson;
 
@@ -757,7 +840,156 @@ abstract class _Weather implements Weather {
   @override
   String get description;
   @override
+  String get icon;
+  @override
   @JsonKey(ignore: true)
   _$$WeatherImplCopyWith<_$WeatherImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Wind _$WindFromJson(Map<String, dynamic> json) {
+  return _Wind.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Wind {
+  double? get speed => throw _privateConstructorUsedError;
+  int? get deg => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $WindCopyWith<Wind> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $WindCopyWith<$Res> {
+  factory $WindCopyWith(Wind value, $Res Function(Wind) then) =
+      _$WindCopyWithImpl<$Res, Wind>;
+  @useResult
+  $Res call({double? speed, int? deg});
+}
+
+/// @nodoc
+class _$WindCopyWithImpl<$Res, $Val extends Wind>
+    implements $WindCopyWith<$Res> {
+  _$WindCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? speed = freezed,
+    Object? deg = freezed,
+  }) {
+    return _then(_value.copyWith(
+      speed: freezed == speed
+          ? _value.speed
+          : speed // ignore: cast_nullable_to_non_nullable
+              as double?,
+      deg: freezed == deg
+          ? _value.deg
+          : deg // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$WindImplCopyWith<$Res> implements $WindCopyWith<$Res> {
+  factory _$$WindImplCopyWith(
+          _$WindImpl value, $Res Function(_$WindImpl) then) =
+      __$$WindImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({double? speed, int? deg});
+}
+
+/// @nodoc
+class __$$WindImplCopyWithImpl<$Res>
+    extends _$WindCopyWithImpl<$Res, _$WindImpl>
+    implements _$$WindImplCopyWith<$Res> {
+  __$$WindImplCopyWithImpl(_$WindImpl _value, $Res Function(_$WindImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? speed = freezed,
+    Object? deg = freezed,
+  }) {
+    return _then(_$WindImpl(
+      speed: freezed == speed
+          ? _value.speed
+          : speed // ignore: cast_nullable_to_non_nullable
+              as double?,
+      deg: freezed == deg
+          ? _value.deg
+          : deg // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$WindImpl implements _Wind {
+  const _$WindImpl({this.speed, this.deg});
+
+  factory _$WindImpl.fromJson(Map<String, dynamic> json) =>
+      _$$WindImplFromJson(json);
+
+  @override
+  final double? speed;
+  @override
+  final int? deg;
+
+  @override
+  String toString() {
+    return 'Wind(speed: $speed, deg: $deg)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$WindImpl &&
+            (identical(other.speed, speed) || other.speed == speed) &&
+            (identical(other.deg, deg) || other.deg == deg));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, speed, deg);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$WindImplCopyWith<_$WindImpl> get copyWith =>
+      __$$WindImplCopyWithImpl<_$WindImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$WindImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Wind implements Wind {
+  const factory _Wind({final double? speed, final int? deg}) = _$WindImpl;
+
+  factory _Wind.fromJson(Map<String, dynamic> json) = _$WindImpl.fromJson;
+
+  @override
+  double? get speed;
+  @override
+  int? get deg;
+  @override
+  @JsonKey(ignore: true)
+  _$$WindImplCopyWith<_$WindImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
